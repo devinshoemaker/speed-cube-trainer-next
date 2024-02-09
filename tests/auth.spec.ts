@@ -97,4 +97,28 @@ test.describe('Auth', () => {
     await page.getByRole('button', { name: 'Logout' }).click();
     await expect(page.getByRole('heading', { name: 'Log In' })).toBeVisible();
   });
+
+  test('should redirect to dashboard if user attempts to navigate to login', async ({
+    page,
+  }) => {
+    await page.goto('/login');
+    await page.getByPlaceholder('name@example.com').fill(seededUser);
+    await page.getByPlaceholder('password').fill(seededPassword);
+    await page.getByRole('button', { name: 'Sign In with Email' }).click();
+    await expect(page).toHaveURL(/.*dashboard/);
+    await page.goto('/login');
+    await expect(page).toHaveURL(/.*dashboard/);
+  });
+
+  test('should redirect to dashboard if user attempts to navigate to register', async ({
+    page,
+  }) => {
+    await page.goto('/login');
+    await page.getByPlaceholder('name@example.com').fill(seededUser);
+    await page.getByPlaceholder('password').fill(seededPassword);
+    await page.getByRole('button', { name: 'Sign In with Email' }).click();
+    await expect(page).toHaveURL(/.*dashboard/);
+    await page.goto('/register');
+    await expect(page).toHaveURL(/.*dashboard/);
+  });
 });
