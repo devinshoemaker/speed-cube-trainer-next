@@ -7,8 +7,9 @@ import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/ui/icons';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { register } from '@/lib/actions';
 import { cn } from '@/lib/utils';
+
+import { register } from '../actions';
 
 export default function LoginPage() {
   const [errorMessage, dispatch] = useFormState(register, undefined);

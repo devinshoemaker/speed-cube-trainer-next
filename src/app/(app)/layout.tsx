@@ -2,7 +2,8 @@ import { redirect } from 'next/navigation';
 import React from 'react';
 
 import { auth } from '@/auth';
-import SideMenu from '@/components/side-menu';
+
+import SideMenu from './_components/side-menu';
 
 export default async function AppLayout({
   children,
