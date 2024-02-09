@@ -3,7 +3,7 @@
 import { AuthError } from 'next-auth';
 import { isRedirectError } from 'next/dist/client/components/redirect';
 
-import { signIn, signOut, signUp } from '@/auth';
+import { signIn, signUp } from '@/auth';
 
 export async function register(
   prevState: string | undefined,
@@ -52,8 +52,4 @@ export async function authenticate(
     console.log('Something went wrong.', error);
     return 'Something went wrong.';
   }
-}
-
-export async function logout() {
-  await signOut();
 }

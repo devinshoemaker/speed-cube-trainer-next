@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 
-import { logout } from '@/app/(auth)/actions';
 import { Button } from '@/components/ui/button';
+
+import { logout } from './actions';
 
 export default function SideMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
