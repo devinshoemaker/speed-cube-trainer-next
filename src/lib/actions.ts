@@ -1,6 +1,7 @@
 'use server';
 
 import { AuthError } from 'next-auth';
+import { isRedirectError } from 'next/dist/client/components/redirect';
 
 import { signIn, signOut, signUp } from '@/auth';
 
@@ -15,6 +16,7 @@ export async function register(
       return error.message;
     }
 
+    console.log('Something went wrong.', error);
     return 'Something went wrong.';
   }
 
@@ -25,6 +27,8 @@ export async function authenticate(
   prevState: string | undefined,
   formData: FormData,
 ) {
+  formData.append('redirectTo', '/dashboard');
+
   try {
     await signIn('credentials', formData);
   } catch (error) {
@@ -33,10 +37,20 @@ export async function authenticate(
         case 'CredentialsSignin':
           return 'Invalid credentials.';
         default:
+          console.log('Something went wrong.', error.message);
           return 'Something went wrong.';
       }
     }
-    throw error;
+
+    // Something is weird here and throws a NEXT_REDIRECT error
+    // even though everything works fine. This prevents the
+    // error from making it to the user or the console.
+    if (isRedirectError(error)) {
+      throw error;
+    }
+
+    console.log('Something went wrong.', error);
+    return 'Something went wrong.';
   }
 }
 
