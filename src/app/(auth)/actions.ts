@@ -27,7 +27,7 @@ export async function authenticate(
   prevState: string | undefined,
   formData: FormData,
 ) {
-  formData.append('redirectTo', '/dashboard');
+  formData.append('redirectTo', '/timer');
 
   try {
     await signIn('credentials', formData);

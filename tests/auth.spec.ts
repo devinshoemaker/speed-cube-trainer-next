@@ -31,29 +31,29 @@ test.describe('Auth', () => {
     await expect(page.getByText('Get started by editing src/')).toBeVisible();
   });
 
-  test('should redirect from dashboard to login if the user is unauthenticated', async ({
+  test('should redirect from timer to login if the user is unauthenticated', async ({
     page,
   }) => {
-    await page.goto('/dashboard');
+    await page.goto('/timer');
     await expect(page.getByRole('heading', { name: 'Log In' })).toBeVisible();
     await expect(page).toHaveURL(/.*login/);
   });
 
-  test('should redirect to dashboard after logging in', async ({ page }) => {
+  test('should redirect to timer after logging in', async ({ page }) => {
     await page.goto('/login');
     await page.getByPlaceholder('name@example.com').fill(seededUser);
     await page.getByPlaceholder('password').fill(seededPassword);
     await page.getByRole('button', { name: 'Sign In with Email' }).click();
-    await expect(page).toHaveURL(/.*dashboard/);
+    await expect(page).toHaveURL(/.*timer/);
   });
 
-  test('should redirect to dashboard after signing up', async ({ page }) => {
+  test('should redirect to timer after signing up', async ({ page }) => {
     shouldDeleteUser = true;
     await page.goto('/register');
     await page.getByPlaceholder('name@example.com').fill(email);
     await page.getByPlaceholder('password').fill(password);
     await page.getByRole('button', { name: 'Sign Up with Email' }).click();
-    await expect(page).toHaveURL(/.*dashboard/);
+    await expect(page).toHaveURL(/.*timer/);
   });
 
   test('should display error if login credentials are invalid and the user does not exist', async ({
@@ -93,32 +93,32 @@ test.describe('Auth', () => {
     await page.getByPlaceholder('name@example.com').fill(seededUser);
     await page.getByPlaceholder('password').fill(seededPassword);
     await page.getByRole('button', { name: 'Sign In with Email' }).click();
-    await expect(page).toHaveURL(/.*dashboard/);
+    await expect(page).toHaveURL(/.*timer/);
     await page.getByRole('button', { name: 'Logout' }).click();
     await expect(page.getByRole('heading', { name: 'Log In' })).toBeVisible();
   });
 
-  test('should redirect to dashboard if user attempts to navigate to login', async ({
+  test('should redirect to timer if user attempts to navigate to login', async ({
     page,
   }) => {
     await page.goto('/login');
     await page.getByPlaceholder('name@example.com').fill(seededUser);
     await page.getByPlaceholder('password').fill(seededPassword);
     await page.getByRole('button', { name: 'Sign In with Email' }).click();
-    await expect(page).toHaveURL(/.*dashboard/);
+    await expect(page).toHaveURL(/.*timer/);
     await page.goto('/login');
-    await expect(page).toHaveURL(/.*dashboard/);
+    await expect(page).toHaveURL(/.*timer/);
   });
 
-  test('should redirect to dashboard if user attempts to navigate to register', async ({
+  test('should redirect to timer if user attempts to navigate to register', async ({
     page,
   }) => {
     await page.goto('/login');
     await page.getByPlaceholder('name@example.com').fill(seededUser);
     await page.getByPlaceholder('password').fill(seededPassword);
     await page.getByRole('button', { name: 'Sign In with Email' }).click();
-    await expect(page).toHaveURL(/.*dashboard/);
+    await expect(page).toHaveURL(/.*timer/);
     await page.goto('/register');
-    await expect(page).toHaveURL(/.*dashboard/);
+    await expect(page).toHaveURL(/.*timer/);
   });
 });

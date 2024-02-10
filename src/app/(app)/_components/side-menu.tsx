@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -41,15 +42,30 @@ export default function SideMenu() {
           isMenuOpen ? '' : '-translate-x-full'
         } md:translate-x-0 transition duration-200 ease-in-out z-10 bg-background border-r`}
       >
-        <form action={logout}>
-          <Button
-            type="submit"
-            variant="ghost"
-            className="flex justify-start w-full px-2"
-          >
-            Logout
-          </Button>
-        </form>
+        <div className="flex items-center space-x-2 px-4">
+          <span className="text-2xl font-extrabold">Cube Trainer</span>
+        </div>
+
+        <nav>
+          <form action={logout}>
+            <Button
+              type="button"
+              variant="ghost"
+              className="flex justify-start w-full p-0"
+            >
+              <Link href="/timer" className="w-full px-4 py-2 flex">
+                Timer
+              </Link>
+            </Button>
+            <Button
+              type="submit"
+              variant="ghost"
+              className="flex justify-start w-full"
+            >
+              Logout
+            </Button>
+          </form>
+        </nav>
       </div>
 
       {isMenuOpen && (
