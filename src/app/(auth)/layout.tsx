@@ -10,7 +10,7 @@ export default async function AuthLayout({
 }) {
   const user = await auth();
   if (user) {
-    redirect('/dashboard');
+    redirect('/timer');
   }
 
   return <>{children}</>;
