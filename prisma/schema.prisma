@@ -3,13 +3,13 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./data.db?connection_limit=1"
 }
-
 
 model User {
   id    String @id @default(cuid())

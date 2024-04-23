@@ -5,6 +5,6 @@
     "dbaeumer.vscode-eslint",
     "prisma.prisma",
     "mtxr.sqltools",
-    "mtxr.sqltools-driver-pg"
+    "mtxr.sqltools-driver-sqlite"
   ]
 }

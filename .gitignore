@@ -43,3 +43,7 @@ postgres-data
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# sqlite
+/prisma/data.db
+/prisma/data.db-journal
